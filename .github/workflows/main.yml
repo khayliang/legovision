@@ -16,13 +16,13 @@ jobs:
         node-version: 12.x
     - name: yarn install and build
       run: |
-        yarn install
+        yarn
         yarn build
 
     - name: Deploy
       uses: s0/git-publish-subdir-action@develop
       env:
-        REPO: git@github.com:owner/repo.git
+        REPO: self
         BRANCH: master
         FOLDER: dist
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
