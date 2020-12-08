@@ -5,7 +5,8 @@ export interface VideoNameInfo{
   processed: boolean;
 }
 
-const serverUrl = "http://0.0.0.0:5000"
+const serverUrl = "https://legovision-server.herokuapp.com"
+
 const fullUrl = (path: string=''): string => {
   const url: string = serverUrl+path;
 
