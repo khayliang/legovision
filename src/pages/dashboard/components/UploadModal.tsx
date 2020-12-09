@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {Modal, Upload} from 'antd'
+import {Modal, Upload, message} from 'antd'
 import styles from './UploadModal.less'
 import {InboxOutlined} from '@ant-design/icons'
 import {uploadVideo} from '../../../services/api'
@@ -15,19 +15,28 @@ export default (
 
     const handleUpload = () => {
       const { fileList } = state;
-      const formData = new FormData();
-      fileList.forEach((file: RcFile) => {
-        formData.append('file', file);
-      });
-      setState({
-        fileList: [],
-        uploading: true,
-      });
-      uploadVideo(formData)
+      if (fileList.length > 0){
+        const formData = new FormData();
+        fileList.forEach((file: RcFile) => {
+          const is10MB = file.size / 1024 / 1024 < 10;
+          if(!is10MB){
+            message.error("Upload file must be smaller than 10MB!");
+          }
+          else{
+            formData.append('file', file);
+            uploadVideo(formData)
+          }
+          setState({
+            fileList: [],
+            uploading: true,
+          });
+        });
+      }
       onOk()
     }
 
     const uploadProps = {
+      accept: '.mp4, video/mp4',
       onRemove: () => {
         setState({
           ...state,
