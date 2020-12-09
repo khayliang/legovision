@@ -8,15 +8,18 @@ export default defineConfig({
     type: 'none',
   },
   routes: [
-    {exact: false, path: '/', component: '@/layouts/index',
-    routes:[ 
-      { path: '/', component: '@/pages/landing' },
-      { path: '/dashboard', component: '@/pages/dashboard' },
-      { path: '/video', component: '@/pages/video' },
+    {
+      exact: false,
+      path: '/',
+      component: '@/layouts/index',
+      routes: [
+        { path: '/', component: '@/pages/landing' },
+        { path: '/dashboard', component: '@/pages/dashboard' },
+        { path: '/video', component: '@/pages/video' },
       ],
     },
   ],
   theme: {
-    "primary-color": "#FFAFCC",
+    'primary-color': '#FFAFCC',
   },
 });

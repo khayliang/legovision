@@ -1,3 +1,3 @@
-import VideoPage from './video'
+import VideoPage from './video';
 
-export default VideoPage
+export default VideoPage;
