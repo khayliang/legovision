@@ -5,7 +5,7 @@ import { useLocation } from 'umi';
 import LegoList from './components/LegoList';
 import ReactPlayer from 'react-player';
 import queryString from 'query-string';
-import { getLegoInfo } from '../../services/api';
+import { getLegoInfo, fullUrl } from '../../services/api';
 
 export default () => {
   const location = useLocation();
@@ -65,7 +65,7 @@ export default () => {
           controls={true}
           url={[
             {
-              src: `http://0.0.0.0:5000/video?name=${videoName}`,
+              src: fullUrl(`/video?name=${videoName}`),
               type: 'video/webm',
             },
           ]}
