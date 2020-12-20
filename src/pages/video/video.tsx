@@ -15,9 +15,17 @@ export default () => {
     currentTime: 0,
     playing: false,
     currentInfo: '',
+    legoAmt: 0,
   });
 
   const [legoInfo, setLegoInfo] = useState(['']);
+
+  const getLegoAmt = (str: string): number => {
+    if (str != undefined){
+      return str.split(';').length - 1
+    }
+    return videoState.legoAmt;
+  }
 
   useEffect(() => {
     getLegoInfo(videoName).then((value: string[]) => {
@@ -25,6 +33,7 @@ export default () => {
       setVideoState({
         ...videoState,
         currentInfo: value[0],
+        legoAmt: getLegoAmt(value[0]),
       });
     });
   }, []);
@@ -35,6 +44,7 @@ export default () => {
     setVideoState({
       ...videoState,
       currentInfo: legoInfo[frame],
+      legoAmt: getLegoAmt(legoInfo[frame]),
     });
   }, [videoState.currentTime]);
 
@@ -72,7 +82,7 @@ export default () => {
         />
       </div>
 
-      <Card title="Detections" bordered={true} className={styles.list}>
+      <Card title={`Detections: ${videoState.legoAmt}`} bordered={true} className={styles.list}>
         <LegoList legoInfo={videoState.currentInfo} />
       </Card>
     </div>
