@@ -1,7 +1,9 @@
 import { defineConfig } from 'umi';
 
 export default defineConfig({
-  publicPath: "https://khayliang.github.io/legovision/",
+  ...(process.env.NODE_ENV !== 'development' && {
+    publicPath: 'https://khayliang.github.io/legovision/',
+  }),
   history: { type: 'hash' },
   locale: { antd: false },
   nodeModulesTransform: {
